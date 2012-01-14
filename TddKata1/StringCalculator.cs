@@ -19,13 +19,26 @@ namespace TddKata1
 
       var nums = numbers.Split(defaultDelimeters);
       int sum = 0;
+      var negatives = "";
       foreach (string num in nums)
       {
         int i;
+        
         if (int.TryParse(num, out i))
         {
+          if (i < 0)
+          {            
+            negatives += i + ",";
+            continue;
+          }
+
           sum += i;
-        };        
+        }        
+      }
+
+      if (!string.IsNullOrEmpty(negatives))
+      {
+        throw new NegativesNotAllowedException(negatives);
       }
       return sum;
     }

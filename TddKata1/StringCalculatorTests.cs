@@ -59,5 +59,11 @@ namespace TddKata1
     {
       Assert.AreEqual(3, stringCalculator.Add("//;\n1;2"));
     }
+
+    [Test]
+    public void AddNegativeWillThrowNegativesNotAllowedException()
+    {
+      Assert.Throws<NegativesNotAllowedException>(() => stringCalculator.Add("-1,-2,10"));
+    }
   }
 }
