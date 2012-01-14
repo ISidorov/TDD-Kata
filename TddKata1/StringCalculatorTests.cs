@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Globalization;
+using System.Text;
 using NUnit.Framework;
 
 namespace TddKata1
@@ -32,18 +33,19 @@ namespace TddKata1
     {
       Assert.AreEqual(3, stringCalculator.Add("1,2"));
     }
-  }
 
-  public class StringCalculator
-  {
-    public int Add(string numbers)
+    [Test]
+    public void AddAnyNumbersWillReturnSum()
     {
-      if (numbers.Equals(string.Empty))
+      var sum = 0;
+      var numbers = new StringBuilder(100);
+      for (var i = 0; i < 100; i++ )
       {
-        return 0;
+        sum += i;
+        numbers.Append(i.ToString(CultureInfo.InvariantCulture) + ",");
       }
-      var nums = numbers.Split(',');
-      return nums.Sum(num => int.Parse(num));
+
+      Assert.AreEqual(sum, stringCalculator.Add(numbers.ToString()));
     }
   }
 }
