@@ -10,7 +10,7 @@ namespace TddKata1
       {
         return 0;
       }
-      var nums = numbers.Split(',');
+      var nums = numbers.Split(',', '\n');
       int sum = 0;
       foreach (string num in nums)
       {

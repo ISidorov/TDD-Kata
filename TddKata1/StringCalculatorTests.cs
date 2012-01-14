@@ -47,5 +47,11 @@ namespace TddKata1
 
       Assert.AreEqual(sum, stringCalculator.Add(numbers.ToString()));
     }
+
+    [Test]
+    public void AddNumbersWithEnterWillReturnSum()
+    {
+      Assert.AreEqual(6, stringCalculator.Add("1\n2,3"));
+    }
   }
 }
