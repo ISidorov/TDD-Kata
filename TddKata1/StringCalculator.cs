@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace TddKata1
 {
   public class StringCalculator
@@ -10,7 +8,16 @@ namespace TddKata1
       {
         return 0;
       }
-      var nums = numbers.Split(',', '\n');
+
+      var defaultDelimeters = new [] {',', '\n'};
+      if (numbers.StartsWith("//"))
+      {
+        defaultDelimeters = new[] { numbers[2] };
+
+        numbers = numbers.Remove(0, 4);
+      }
+
+      var nums = numbers.Split(defaultDelimeters);
       int sum = 0;
       foreach (string num in nums)
       {
