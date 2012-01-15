@@ -1,40 +1,36 @@
 ﻿using System.Globalization;
 using System.Text;
-using NUnit.Framework;
-
+using Xunit;
 namespace TddKata1
-{
-  
-  [TestFixture]
-  public class StringCalculatorTests
+{ 
+  public class StringCalculatorFacts
   {
-    private StringCalculator stringCalculator;
+    private readonly StringCalculator stringCalculator;
 
-    [SetUp]
-    public void Init()
+    public StringCalculatorFacts()
     {
       stringCalculator = new StringCalculator();
     }
-
-    [Test]
+    
+    [Fact]
     public void AddEmptyStringWillReturn0()
     {
-      Assert.AreEqual(0,  stringCalculator.Add(string.Empty));
+      Assert.Equal(0,  stringCalculator.Add(string.Empty));
     }
 
-    [Test]
+    [Fact]
     public void AddOneNumberWillReturnThatNumber()
     {      
-      Assert.AreEqual(1 , stringCalculator.Add("1"));
+      Assert.Equal(1 , stringCalculator.Add("1"));
     }
 
-    [Test]
+    [Fact]
     public void AddTwoNumbersWillReturnSum()
     {
-      Assert.AreEqual(3, stringCalculator.Add("1,2"));
+      Assert.Equal(3, stringCalculator.Add("1,2"));
     }
 
-    [Test]
+    [Fact]
     public void AddAnyNumbersWillReturnSum()
     {
       var sum = 0;
@@ -45,22 +41,22 @@ namespace TddKata1
         numbers.Append(i.ToString(CultureInfo.InvariantCulture) + ",");
       }
 
-      Assert.AreEqual(sum, stringCalculator.Add(numbers.ToString()));
+      Assert.Equal(sum, stringCalculator.Add(numbers.ToString()));
     }
 
-    [Test]
+    [Fact]
     public void AddNumbersWithEnterWillReturnSum()
     {
-      Assert.AreEqual(6, stringCalculator.Add("1\n2,3"));
+      Assert.Equal(6, stringCalculator.Add("1\n2,3"));
     }
 
-    [Test]
+    [Fact]
     public void AddSupportDifferentDelimeters()
     {
-      Assert.AreEqual(3, stringCalculator.Add("//;\n1;2"));
+      Assert.Equal(3, stringCalculator.Add("//;\n1;2"));
     }
 
-    [Test]
+    [Fact]
     public void AddNegativeWillThrowNegativesNotAllowedException()
     {
       Assert.Throws<NegativesNotAllowedException>(() => stringCalculator.Add("-1,-2,10"));
